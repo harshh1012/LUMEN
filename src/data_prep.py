@@ -1,6 +1,8 @@
 # src/data_prep.py
 
 import os
+import re
+import json
 from tqdm import tqdm
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from pypdf import PdfReader
@@ -11,23 +13,32 @@ def extract_text_from_pdf(pdf_path: str) -> str:
     """Extract raw text from a PDF file."""
     reader = PdfReader(pdf_path)
     text = ""
-    for page in reader.pages:
-        text += page.extract_text() or ""
+    for page_num, page in enumerate(reader.pages, start=1):
+        try:
+            page_text = page.extract_text() or ""
+            text += page_text + "\n"
+        except Exception as e:
+            print(f"⚠️ Skipping page {page_num} in {pdf_path}: {e}")
     return text
 
 
 def clean_text(text: str) -> str:
     """Clean unwanted formatting from extracted text."""
-    text = text.replace('\n', ' ')
-    text = ' '.join(text.split())  # remove multiple spaces
-    return text
+    text = re.sub(r'\s+', ' ', text)
+    text = re.sub(r'–', '-', text)
+    text = re.sub(r'Page \d+', '', text)
+    return text.strip()
 
 
-def chunk_text(text: str, chunk_size: int = 800, overlap: int = 150):
+def chunk_text(text: str, file_name: str, chunk_size: int = 800, overlap: int = 150):
     """Split text into overlapping chunks for embeddings."""
-    splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=overlap)
-    chunks = splitter.split_text(text)
-    return chunks
+    if "constitution" in file_name.lower():
+        splitter = RecursiveCharacterTextSplitter(
+            chunk_size=1000, chunk_overlap=100, separators=["Article", "PART", "SCHEDULE"]
+        )
+    else:
+        splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=overlap)
+    return splitter.split_text(text)
 
 
 def process_pdfs(raw_dir: str = "./data/raw", processed_dir: str = "./data/processed"):
@@ -37,27 +48,35 @@ def process_pdfs(raw_dir: str = "./data/raw", processed_dir: str = "./data/proce
 
     pdf_files = [f for f in os.listdir(raw_dir) if f.lower().endswith(".pdf")]
     if not pdf_files:
-        print("⚠️  No PDF files found in /data/raw/")
+        print("⚠️ No PDF files found in /data/raw/")
         return
 
     for file in tqdm(pdf_files, desc="Processing PDFs"):
         path = os.path.join(raw_dir, file)
         text = extract_text_from_pdf(path)
         cleaned = clean_text(text)
-        chunks = chunk_text(cleaned)
+        chunks = chunk_text(cleaned, file)
 
-        out_file = os.path.join(processed_dir, f"{os.path.splitext(file)[0]}_chunks.txt")
+        structured_chunks = [
+            {"source": file, "chunk_id": i + 1, "content": chunk}
+            for i, chunk in enumerate(chunks)
+        ]
+
+        out_file = os.path.join(processed_dir, f"{os.path.splitext(file)[0]}_chunks.json")
         with open(out_file, "w", encoding="utf-8") as f:
-            for chunk in chunks:
-                f.write(chunk + "\n---\n")
+            json.dump(structured_chunks, f, indent=2, ensure_ascii=False)
 
         all_docs.append({
-            "source": file,
-            "num_chunks": len(chunks),
+            "file": file,
+            "num_chunks": len(chunks)
         })
+        print(f"✅ Processed {file}: {len(chunks)} chunks saved → {out_file}")
 
-    print(f"✅ Processed {len(pdf_files)} PDFs and saved chunks to {processed_dir}")
-    return all_docs
+    print(f"\n✅ Total PDFs processed: {len(pdf_files)}")
+    for doc in all_docs:
+        print(f"  - {doc['file']} → {doc['num_chunks']} chunks")
+
+    return {"processed_files": len(pdf_files), "details": all_docs}
 
 
 if __name__ == "__main__":

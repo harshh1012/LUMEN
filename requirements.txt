@@ -3,3 +3,9 @@ python-dotenv
 pypdf
 langchain
 tqdm
+langchain-community
+chromadb
+faiss-cpu
+sentence-transformers
+langchain-huggingface
+tqdm
