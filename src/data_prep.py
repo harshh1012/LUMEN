@@ -3,7 +3,7 @@
 import os
 from tqdm import tqdm
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from PyPDF2 import PdfReader
+from pypdf import PdfReader
 from src.utils import ensure_dir
 
 
