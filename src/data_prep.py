@@ -18,12 +18,12 @@ def extract_text_from_pdf(pdf_path: str) -> str:
             page_text = page.extract_text() or ""
             text += page_text + "\n"
         except Exception as e:
-            print(f"⚠️ Skipping page {page_num} in {pdf_path}: {e}")
+            print(f" Skipping page {page_num} in {pdf_path}: {e}")
     return text
 
 
 def clean_text(text: str) -> str:
-    """Clean unwanted formatting from extracted text."""
+    """Clean unwanted formatting from text."""
     text = re.sub(r'\s+', ' ', text)
     text = re.sub(r'–', '-', text)
     text = re.sub(r'Page \d+', '', text)
@@ -31,7 +31,7 @@ def clean_text(text: str) -> str:
 
 
 def chunk_text(text: str, file_name: str, chunk_size: int = 800, overlap: int = 150):
-    """Split text into overlapping chunks for embeddings."""
+    """Split text into overlapping chunks ."""
     if "constitution" in file_name.lower():
         splitter = RecursiveCharacterTextSplitter(
             chunk_size=1000, chunk_overlap=100, separators=["Article", "PART", "SCHEDULE"]
@@ -48,7 +48,7 @@ def process_pdfs(raw_dir: str = "./data/raw", processed_dir: str = "./data/proce
 
     pdf_files = [f for f in os.listdir(raw_dir) if f.lower().endswith(".pdf")]
     if not pdf_files:
-        print("⚠️ No PDF files found in /data/raw/")
+        print(" No PDF files found in /data/raw/")
         return
 
     for file in tqdm(pdf_files, desc="Processing PDFs"):
@@ -70,9 +70,9 @@ def process_pdfs(raw_dir: str = "./data/raw", processed_dir: str = "./data/proce
             "file": file,
             "num_chunks": len(chunks)
         })
-        print(f"✅ Processed {file}: {len(chunks)} chunks saved → {out_file}")
+        print(f"Processed {file}: {len(chunks)} chunks saved → {out_file}")
 
-    print(f"\n✅ Total PDFs processed: {len(pdf_files)}")
+    print(f"\n Total PDFs processed: {len(pdf_files)}")
     for doc in all_docs:
         print(f"  - {doc['file']} → {doc['num_chunks']} chunks")
 

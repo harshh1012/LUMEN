@@ -9,3 +9,10 @@ faiss-cpu
 sentence-transformers
 langchain-huggingface
 tqdm
+
+# LLM + API Clients
+groq
+langchain-groq
+
+# Environment Variables
+python-dotenv
