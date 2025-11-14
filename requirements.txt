@@ -9,6 +9,7 @@ faiss-cpu
 sentence-transformers
 langchain-huggingface
 tqdm
+pandas
 
 # LLM + API Clients
 groq
