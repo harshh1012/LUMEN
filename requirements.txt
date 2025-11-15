@@ -8,6 +8,7 @@ chromadb
 faiss-cpu
 sentence-transformers
 langchain-huggingface
+langchain-chroma
 tqdm
 pandas
 
@@ -17,3 +18,18 @@ langchain-groq
 
 # Environment Variables
 python-dotenv
+
+#fastapi
+fastapi
+uvicorn
+streamlit
+
+# Embeddings backend
+torch
+
+# ML for mental bot
+joblib
+scikit-learn
+
+# Optional safety
+requests
