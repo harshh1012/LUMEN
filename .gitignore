@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+.venv/
+
+# Env files
+.env
+.env.*
+
+# Streamlit cache
+.streamlit/
+
+# SQLite DB
+data/kb.sqlite
+data/embeddings.npy
+data/embeddings_meta.json
+
+# KB docs
+data/kb_docs/
