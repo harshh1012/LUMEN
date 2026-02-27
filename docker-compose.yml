@@ -5,7 +5,7 @@ services:
     build: .
     container_name: ai_chatbot_app
     ports:
-      - "8501:8501"
+      - "8000:8000"
     volumes:
       - .:/app
     env_file:

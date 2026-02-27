@@ -6,11 +6,24 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./data/kb.sqlite")
+DATABASE_URL = (
+    os.getenv("DATABASE_URL")
+    or os.getenv("SUPABASE_DB_URL")
+    or "sqlite:///./data/kb.sqlite"
+)
+
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+
+is_sqlite = DATABASE_URL.startswith("sqlite")
+if (not is_sqlite) and ("supabase.co" in DATABASE_URL) and ("sslmode=" not in DATABASE_URL):
+    sep = "&" if "?" in DATABASE_URL else "?"
+    DATABASE_URL = f"{DATABASE_URL}{sep}sslmode=require"
 
 engine = create_engine(
     DATABASE_URL,
-    connect_args={"check_same_thread": False} if "sqlite" in DATABASE_URL else {}
+    connect_args={"check_same_thread": False} if is_sqlite else {},
+    pool_pre_ping=(not is_sqlite),
 )
 
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
