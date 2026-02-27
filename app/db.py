@@ -27,6 +27,19 @@ class User(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
 
 
+class AuthUser(Base):
+    __tablename__ = "auth_users"
+
+    id = Column(Integer, primary_key=True)
+    full_name = Column(String, nullable=False)
+    phone = Column(String, unique=True, nullable=False)
+    email = Column(String, unique=True, nullable=False)
+    password_hash = Column(String, nullable=False)
+    password_salt = Column(String, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+
 class Conversation(Base):
     __tablename__ = "conversations"
 

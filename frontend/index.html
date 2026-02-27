@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/frontend/styles.css" />
+</head>
+<body>
+  <main id="authScreen" class="layout">
+    <section class="art-panel" aria-label="Interactive geometric characters">
+      <svg id="scene" class="scene" viewBox="0 0 620 620" role="img" aria-label="Three colorful geometric characters with animated eyes">
+        <rect x="0" y="0" width="620" height="620" rx="32" fill="#f7efe5"></rect>
+        <g class="character" transform="translate(68 106)">
+          <rect x="0" y="0" width="164" height="246" rx="26" fill="#8b5cf6"></rect>
+          <g class="open-eyes">
+            <g class="eye" data-radius="9"><circle class="sclera" cx="52" cy="82" r="20" fill="#ffffff"></circle><circle class="pupil" cx="52" cy="82" r="7.5" fill="#101010"></circle></g>
+            <g class="eye" data-radius="9"><circle class="sclera" cx="114" cy="82" r="20" fill="#ffffff"></circle><circle class="pupil" cx="114" cy="82" r="7.5" fill="#101010"></circle></g>
+          </g>
+          <g class="closed-eyes"><path d="M 34 84 Q 52 96 70 84" class="closed-eye-path"></path><path d="M 96 84 Q 114 96 132 84" class="closed-eye-path"></path></g>
+          <g class="mouth"><path d="M 62 140 L 102 140" class="mouth-neutral"></path><path d="M 62 140 Q 82 160 102 140" class="mouth-smile"></path><path d="M 62 150 Q 82 132 102 150" class="mouth-sad"></path></g>
+        </g>
+        <g class="character" transform="translate(278 204)">
+          <path d="M 0 126 A 126 126 0 0 1 252 126 L 252 188 L 0 188 Z" fill="#fb923c"></path>
+          <g class="open-eyes">
+            <g class="eye" data-radius="9"><circle class="sclera" cx="90" cy="94" r="19" fill="#ffffff"></circle><circle class="pupil" cx="90" cy="94" r="7" fill="#101010"></circle></g>
+            <g class="eye" data-radius="9"><circle class="sclera" cx="162" cy="94" r="19" fill="#ffffff"></circle><circle class="pupil" cx="162" cy="94" r="7" fill="#101010"></circle></g>
+          </g>
+          <g class="closed-eyes"><path d="M 72 96 Q 90 108 108 96" class="closed-eye-path"></path><path d="M 144 96 Q 162 108 180 96" class="closed-eye-path"></path></g>
+          <g class="mouth"><path d="M 108 146 L 144 146" class="mouth-neutral"></path><path d="M 108 146 Q 126 164 144 146" class="mouth-smile"></path><path d="M 108 156 Q 126 138 144 156" class="mouth-sad"></path></g>
+        </g>
+        <g class="character" transform="translate(180 408)">
+          <rect x="0" y="0" width="260" height="136" rx="20" fill="#facc15"></rect>
+          <g class="open-eyes">
+            <g class="eye" data-radius="8"><circle class="sclera" cx="98" cy="58" r="17" fill="#ffffff"></circle><circle class="pupil" cx="98" cy="58" r="6.5" fill="#101010"></circle></g>
+            <g class="eye" data-radius="8"><circle class="sclera" cx="162" cy="58" r="17" fill="#ffffff"></circle><circle class="pupil" cx="162" cy="58" r="6.5" fill="#101010"></circle></g>
+          </g>
+          <g class="closed-eyes"><path d="M 82 60 Q 98 72 114 60" class="closed-eye-path"></path><path d="M 146 60 Q 162 72 178 60" class="closed-eye-path"></path></g>
+          <g class="mouth"><path d="M 112 96 L 148 96" class="mouth-neutral"></path><path d="M 112 96 Q 130 112 148 96" class="mouth-smile"></path><path d="M 112 104 Q 130 88 148 104" class="mouth-sad"></path></g>
+        </g>
+      </svg>
+    </section>
+    <section class="form-panel">
+      <article class="card">
+        <h1>Welcome back!</h1>
+        <p class="sub">Register first, then log in using email or phone.</p>
+        <div class="view-switch" role="tablist" aria-label="Auth views">
+          <button id="tab-register" class="tab active" type="button" data-view="register">Register</button>
+          <button id="tab-login" class="tab" type="button" data-view="login">Login</button>
+        </div>
+        <section id="register-view" class="auth-view active" aria-label="Register view">
+          <form id="register-form" novalidate>
+            <label for="full-name">Full Name</label><input id="full-name" type="text" placeholder="Your full name" autocomplete="name" required />
+            <label for="reg-phone">Phone Number</label><input id="reg-phone" type="tel" placeholder="10 digit phone number" autocomplete="tel" inputmode="numeric" maxlength="10" required />
+            <label for="reg-email">Email</label><input id="reg-email" type="email" placeholder="you@example.com" autocomplete="email" required />
+            <label for="reg-password">Password</label><input id="reg-password" type="password" placeholder="Create a strong password" autocomplete="new-password" required />
+            <div class="strength-wrap" aria-live="polite"><div id="strength-bar" class="strength-bar"></div><p id="strength-text" class="strength-text">Strength: -</p></div>
+            <button type="submit" class="btn btn-primary">Create Account</button>
+          </form>
+        </section>
+        <section id="login-view" class="auth-view" aria-label="Login view">
+          <form id="email-login-form" class="method-form active" novalidate>
+            <label for="login-email">Email or Phone</label><input id="login-email" type="text" placeholder="you@example.com or 1234567890" autocomplete="username" />
+            <label for="login-password">Password</label><input id="login-password" type="password" placeholder="Enter your password" autocomplete="current-password" />
+            <button type="submit" class="btn btn-primary">Log in</button>
+          </form>
+          <button id="forgot-toggle" type="button" class="forgot-link">Forgot password?</button>
+          <form id="forgot-form" class="forgot-form hidden" novalidate>
+            <label for="forgot-email">Registered Email</label><input id="forgot-email" type="email" placeholder="you@example.com" autocomplete="email" />
+            <label for="forgot-phone">Registered Phone Number</label><input id="forgot-phone" type="tel" placeholder="10 digit phone number" autocomplete="tel" inputmode="numeric" maxlength="10" />
+            <label for="forgot-password">New Password</label><input id="forgot-password" type="password" placeholder="Enter new password" autocomplete="new-password" />
+            <label for="forgot-confirm-password">Confirm New Password</label><input id="forgot-confirm-password" type="password" placeholder="Re-enter new password" autocomplete="new-password" />
+            <button type="submit" class="btn btn-secondary">Reset Password</button>
+          </form>
+        </section>
+        <p id="auth-status" class="status" aria-live="polite"></p>
+      </article>
+    </section>
+  </main>
+  <main id="chatScreen" class="app hidden">
+    <aside class="sidebar">
+      <div class="brand">AI Assistant</div>
+      <div id="whoami" class="section muted"></div>
+      <div class="section">
+        <label for="mode">Mode</label>
+        <select id="mode"><option value="mental">Mental Health</option><option value="legal">Legal Assistance</option></select>
+      </div>
+      <div class="section">
+        <label for="kbFiles">Knowledge Base Files</label>
+        <input id="kbFiles" type="file" multiple accept=".pdf,.txt" />
+        <button id="uploadBtn" class="btn secondary">Upload Files</button>
+        <button id="ingestBtn" class="btn secondary">Ingest Knowledge Base</button>
+      </div>
+      <div class="section">
+        <button id="newChatBtn" class="btn">New Chat</button>
+        <button id="rewardBtn" class="btn secondary">End Session & Reward</button>
+        <button id="logoutBtn" class="btn secondary">Log out</button>
+      </div>
+      <div id="sidebarStatus" class="status"></div>
+    </aside>
+    <section class="main">
+      <header class="topbar"><h1>AI Assistant</h1><p id="modeText">Supportive conversations with safety-aware tone.</p></header>
+      <section id="messages" class="messages"></section>
+      <section id="sourcesPanel" class="sources hidden"><h3>Sources</h3><div id="sourcesList"></div></section>
+      <form id="composer" class="composer"><textarea id="prompt" rows="1" placeholder="Message AI Assistant"></textarea><button type="submit" id="sendBtn" class="btn">Send</button></form>
+    </section>
+  </main>
+  <script src="/frontend/app.js"></script>
+</body>
+</html>
