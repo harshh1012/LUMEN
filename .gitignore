@@ -1,119 +1,23 @@
-# ============================================================
-# 🧠 LEGAL CHATBOT PROJECT (.gitignore)
-# ============================================================
-
-# -----------------------------
-# Python Bytecode & Cache
-# -----------------------------
+# Python
 __pycache__/
-*.py[cod]
-*.so
-*.pyo
-*.pyd
-*.db
-*.sqlite3
-*.log
-*.tmp
-*.cache/
-.cache/
+*.pyc
 
-# -----------------------------
-# Virtual Environment
-# -----------------------------
-venv/
+# Virtual environment
+.venv/
+
+# Env files
 .env
 .env.*
 
-# -----------------------------
-# OS-specific
-# -----------------------------
-.DS_Store
-Thumbs.db
-desktop.ini
+# Streamlit cache
+.streamlit/
 
-# -----------------------------
-# IDE / Editor Settings
-# -----------------------------
-.vscode/
-.idea/
-*.swp
+# SQLite DB
+data/kb.sqlite
+data/embeddings.npy
+data/embeddings_meta.json
 
-# -----------------------------
-# Data Directories
-# -----------------------------
-/data/raw/*
-/data/processed/*
-!data/raw/.gitkeep
-!data/processed/.gitkeep
-
-# Keep folder structure but ignore files
-# You can manually keep placeholders like:
-# touch data/raw/.gitkeep
-# touch data/processed/.gitkeep
-
-# -----------------------------
-# Vector Store (Chroma + FAISS)
-# -----------------------------
-/vector_store/*
-!vector_store/.gitkeep
-
-# Ignore Chroma persistence files
-*.parquet
-*.bin
-*.pkl
-*.faiss
-*.npy
-*.h5
-chroma.sqlite3
-index/
-
-# -----------------------------
-# Logs & Reports
-# -----------------------------
-logs/
-*.log
-report*.txt
-*.out
-
-# -----------------------------
-# Jupyter / Notebooks
-# -----------------------------
-.ipynb_checkpoints/
-notebooks/.ipynb_checkpoints/
-
-# -----------------------------
-# Build / Distribution
-# -----------------------------
-dist/
-build/
-*.egg-info/
-*.spec
-
-# -----------------------------
-# Temporary Files
-# -----------------------------
-*.bak
-*.tmp
-*.old
-*.orig
-
-# -----------------------------
-# Testing / Coverage
-# -----------------------------
-htmlcov/
-.tox/
-.nox/
-.coverage
-coverage.xml
-.pytest_cache/
-*.pytest_cache/
-tests/__pycache__/
-
-# ============================================================
-# ✅ Summary of Ignored Files
-# - Raw & processed data
-# - Vector store (FAISS/Chroma)
-# - Virtual environment
-# - Cache, logs, and temp files
-# - IDE settings & OS junk
-# ============================================================
+# KB docs
+data/kb_docs/
+    
+.venv/

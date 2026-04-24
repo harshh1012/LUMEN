@@ -1,35 +1,36 @@
-pytest
-python-dotenv
-pypdf
-langchain
-tqdm
-langchain-community
-chromadb
-faiss-cpu
-sentence-transformers
-langchain-huggingface
-langchain-chroma
-tqdm
-pandas
+# ─── Web framework ────────────────────────────────────────────────────────────
+fastapi==0.115.0
+uvicorn==0.30.6
+python-multipart==0.0.9
+pydantic==1.10.21
 
-# LLM + API Clients
-groq
-langchain-groq
+# ─── Auth ─────────────────────────────────────────────────────────────────────
+PyJWT==2.8.0
 
-# Environment Variables
-python-dotenv
+# ─── Database ─────────────────────────────────────────────────────────────────
+sqlalchemy==1.4.49
+alembic==1.13.1
+psycopg2-binary==2.9.9
 
-#fastapi
-fastapi
-uvicorn
-streamlit
+# ─── AI / LLM ─────────────────────────────────────────────────────────────────
+google-generativeai==0.5.4
 
-# Embeddings backend
-torch
+# ─── Embeddings & NLP (Python 3.12 + Windows compatible) ──────────────────────
+torch==2.2.2
+transformers==4.37.2
+sentence-transformers==2.3.1
 
-# ML for mental bot
-joblib
-scikit-learn
+# ─── ML / Math ────────────────────────────────────────────────────────────────
+scikit-learn>=1.3.0
+numpy==1.26.4
 
-# Optional safety
-requests
+# ─── Document ingestion ───────────────────────────────────────────────────────
+pdfplumber==0.9.0
+
+# ─── Streamlit UI ─────────────────────────────────────────────────────────────
+streamlit==1.30.0
+
+# ─── Utilities ────────────────────────────────────────────────────────────────
+python-dotenv==1.0.1
+langdetect==1.0.9
+openai==1.12.0

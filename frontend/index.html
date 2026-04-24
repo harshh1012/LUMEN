@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumen — AI Companion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/frontend/styles.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════ AUTH SCREEN ═══════════════════════════ -->
+  <main id="authScreen" class="auth-layout">
+    <div class="auth-bg">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+
+    <section class="art-col" aria-hidden="true">
+      <div class="art-wordmark">Lumen</div>
+      <svg id="scene" class="scene" viewBox="0 0 620 620" aria-hidden="true">
+        <rect x="0" y="0" width="620" height="620" rx="40" fill="rgba(255,255,255,0.04)"></rect>
+        <!-- Character 1: purple rectangle -->
+        <g class="character" transform="translate(68 106)">
+          <rect x="0" y="0" width="164" height="246" rx="26" fill="#7c5cfc"></rect>
+          <rect x="0" y="0" width="164" height="246" rx="26" fill="url(#grad1)" opacity="0.5"></rect>
+          <g class="open-eyes">
+            <g class="eye"><circle class="sclera" cx="52" cy="82" r="22" fill="#ffffff"></circle><circle class="pupil" cx="52" cy="82" r="8" fill="#1a0533"></circle></g>
+            <g class="eye"><circle class="sclera" cx="114" cy="82" r="22" fill="#ffffff"></circle><circle class="pupil" cx="114" cy="82" r="8" fill="#1a0533"></circle></g>
+          </g>
+          <g class="closed-eyes"><path d="M 32 84 Q 52 100 72 84" class="closed-eye-path"></path><path d="M 94 84 Q 114 100 134 84" class="closed-eye-path"></path></g>
+          <g class="mouth"><path d="M 60 142 L 106 142" class="mouth-neutral"></path><path d="M 60 142 Q 83 164 106 142" class="mouth-smile"></path><path d="M 60 154 Q 83 134 106 154" class="mouth-sad"></path></g>
+        </g>
+        <!-- Character 2: orange dome -->
+        <g class="character" transform="translate(278 204)">
+          <path d="M 0 126 A 126 126 0 0 1 252 126 L 252 188 L 0 188 Z" fill="#ff8c42"></path>
+          <path d="M 0 126 A 126 126 0 0 1 252 126 L 252 188 L 0 188 Z" fill="url(#grad2)" opacity="0.4"></path>
+          <g class="open-eyes">
+            <g class="eye"><circle class="sclera" cx="90" cy="94" r="21" fill="#ffffff"></circle><circle class="pupil" cx="90" cy="94" r="8" fill="#2a1500"></circle></g>
+            <g class="eye"><circle class="sclera" cx="162" cy="94" r="21" fill="#ffffff"></circle><circle class="pupil" cx="162" cy="94" r="8" fill="#2a1500"></circle></g>
+          </g>
+          <g class="closed-eyes"><path d="M 70 96 Q 90 112 110 96" class="closed-eye-path"></path><path d="M 142 96 Q 162 112 182 96" class="closed-eye-path"></path></g>
+          <g class="mouth"><path d="M 108 148 L 144 148" class="mouth-neutral"></path><path d="M 108 148 Q 126 168 144 148" class="mouth-smile"></path><path d="M 108 158 Q 126 138 144 158" class="mouth-sad"></path></g>
+        </g>
+        <!-- Character 3: yellow rectangle -->
+        <g class="character" transform="translate(180 408)">
+          <rect x="0" y="0" width="260" height="136" rx="22" fill="#f5c518"></rect>
+          <rect x="0" y="0" width="260" height="136" rx="22" fill="url(#grad3)" opacity="0.4"></rect>
+          <g class="open-eyes">
+            <g class="eye"><circle class="sclera" cx="98" cy="58" r="19" fill="#ffffff"></circle><circle class="pupil" cx="98" cy="58" r="7.5" fill="#1a1400"></circle></g>
+            <g class="eye"><circle class="sclera" cx="162" cy="58" r="19" fill="#ffffff"></circle><circle class="pupil" cx="162" cy="58" r="7.5" fill="#1a1400"></circle></g>
+          </g>
+          <g class="closed-eyes"><path d="M 80 60 Q 98 76 116 60" class="closed-eye-path"></path><path d="M 144 60 Q 162 76 180 60" class="closed-eye-path"></path></g>
+          <g class="mouth"><path d="M 112 98 L 148 98" class="mouth-neutral"></path><path d="M 112 98 Q 130 116 148 98" class="mouth-smile"></path><path d="M 112 108 Q 130 90 148 108" class="mouth-sad"></path></g>
+        </g>
+        <defs>
+          <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fff" stop-opacity="0.2"/><stop offset="100%" stop-color="#000" stop-opacity="0.1"/></linearGradient>
+          <linearGradient id="grad2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fff" stop-opacity="0.2"/><stop offset="100%" stop-color="#000" stop-opacity="0.1"/></linearGradient>
+          <linearGradient id="grad3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fff" stop-opacity="0.2"/><stop offset="100%" stop-color="#000" stop-opacity="0.1"/></linearGradient>
+        </defs>
+      </svg>
+      <p class="art-tagline">Your compassionate AI companion for mental wellness &amp; legal clarity.</p>
+    </section>
+
+    <section class="form-col">
+      <article class="card">
+        <div class="card-logo">✦</div>
+        <h1 class="card-title">Welcome to Lumen</h1>
+        <p class="card-sub">Mental health support &amp; legal information, always available.</p>
+
+        <div class="tabs" role="tablist">
+          <button id="tab-register" class="tab active" type="button" role="tab" aria-selected="true">Create account</button>
+          <button id="tab-login" class="tab" type="button" role="tab" aria-selected="false">Sign in</button>
+        </div>
+
+        <!-- Register -->
+        <section id="register-view" class="auth-view active">
+          <form id="register-form" novalidate autocomplete="on">
+            <div class="field">
+              <label for="full-name">Full name</label>
+              <input id="full-name" type="text" placeholder="Your full name" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="reg-phone">Phone number</label>
+              <input id="reg-phone" type="tel" placeholder="10-digit number" autocomplete="tel" inputmode="numeric" maxlength="10" required />
+            </div>
+            <div class="field">
+              <label for="reg-email">Email</label>
+              <input id="reg-email" type="email" placeholder="you@example.com" autocomplete="email" required />
+            </div>
+            <div class="field">
+              <label for="reg-password">Password</label>
+              <div class="input-wrap">
+                <input id="reg-password" type="password" placeholder="8+ characters" autocomplete="new-password" required />
+                <button type="button" class="eye-toggle" data-target="reg-password" aria-label="Toggle password visibility">
+                  <svg class="eye-icon show-icon" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                  <svg class="eye-icon hide-icon" style="display:none" viewBox="0 0 24 24"><path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46A11.804 11.804 0 001 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/></svg>
+                </button>
+              </div>
+              <div class="strength-wrap">
+                <div id="strength-bar" class="strength-bar"><div id="strength-fill"></div></div>
+                <span id="strength-text" class="strength-label">Strength: —</span>
+              </div>
+            </div>
+            <button type="submit" class="btn-primary">Create account</button>
+          </form>
+        </section>
+
+        <!-- Login -->
+        <section id="login-view" class="auth-view">
+          <form id="email-login-form" novalidate autocomplete="on">
+            <div class="field">
+              <label for="login-email">Email or phone</label>
+              <input id="login-email" type="text" placeholder="you@example.com or 1234567890" autocomplete="username" required />
+            </div>
+            <div class="field">
+              <label for="login-password">Password</label>
+              <div class="input-wrap">
+                <input id="login-password" type="password" placeholder="Your password" autocomplete="current-password" required />
+                <button type="button" class="eye-toggle" data-target="login-password" aria-label="Toggle password visibility">
+                  <svg class="eye-icon show-icon" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                  <svg class="eye-icon hide-icon" style="display:none" viewBox="0 0 24 24"><path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46A11.804 11.804 0 001 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/></svg>
+                </button>
+              </div>
+            </div>
+            <button type="submit" class="btn-primary">Sign in</button>
+            <button id="forgot-toggle" type="button" class="link-btn">Forgot password?</button>
+          </form>
+
+          <div id="forgot-panel" class="forgot-panel hidden">
+            <div class="forgot-divider"><span>Reset password</span></div>
+            <form id="forgot-form" novalidate>
+              <div class="field">
+                <label for="forgot-email">Registered email</label>
+                <input id="forgot-email" type="email" placeholder="you@example.com" autocomplete="email" />
+              </div>
+              <div class="field">
+                <label for="forgot-phone">Registered phone</label>
+                <input id="forgot-phone" type="tel" placeholder="10-digit number" autocomplete="tel" inputmode="numeric" maxlength="10" />
+              </div>
+              <div class="field">
+                <label for="forgot-password">New password</label>
+                <input id="forgot-password" type="password" placeholder="8+ characters" autocomplete="new-password" />
+              </div>
+              <div class="field">
+                <label for="forgot-confirm-password">Confirm password</label>
+                <input id="forgot-confirm-password" type="password" placeholder="Repeat new password" autocomplete="new-password" />
+              </div>
+              <button type="submit" class="btn-secondary">Reset password</button>
+            </form>
+          </div>
+        </section>
+
+        <p id="auth-status" class="auth-msg" role="alert" aria-live="polite"></p>
+      </article>
+    </section>
+  </main>
+
+  <!-- ═══════════════════════════════ CHAT SCREEN ═══════════════════════════ -->
+  <div id="chatScreen" class="app hidden">
+
+    <!-- Left nav: conversations history -->
+    <nav class="nav-rail">
+      <div class="rail-header">
+        <span class="rail-logo">✦ Lumen</span>
+        <button id="newChatBtn" class="rail-new" title="New conversation" aria-label="New conversation">
+          <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+        </button>
+      </div>
+
+      <div class="rail-mode-wrap">
+        <button class="mode-chip active" data-mode="mental" aria-pressed="true">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          Mental Health
+        </button>
+        <button class="mode-chip" data-mode="legal" aria-pressed="false">
+          <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+          Legal Assistance
+        </button>
+      </div>
+
+      <div class="rail-section-label">Recent conversations</div>
+      <div id="convList" class="conv-list">
+        <p class="conv-empty">No conversations yet</p>
+      </div>
+
+      <div class="rail-footer">
+        <div id="whoami" class="user-chip">
+          <div class="user-avatar" id="userAvatar">?</div>
+          <div class="user-info">
+            <span id="userName" class="user-name">—</span>
+            <span id="userEmail" class="user-email">—</span>
+          </div>
+        </div>
+        <button id="logoutBtn" class="icon-btn" title="Sign out" aria-label="Sign out">
+          <svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Main chat area -->
+    <main class="chat-main">
+      <header class="chat-header">
+        <div class="header-left">
+          <button id="sidebarToggle" class="icon-btn" aria-label="Toggle sidebar">
+            <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          </button>
+          <div>
+            <h1 id="chatTitle" class="chat-title">Mental Health Support</h1>
+            <p id="chatSubtitle" class="chat-subtitle">Supportive conversations with safety-aware tone</p>
+          </div>
+        </div>
+        <div class="header-right">
+          <button id="rewardBtn" class="ghost-btn" title="End session &amp; get reward">
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            End Session
+          </button>
+        </div>
+      </header>
+
+      <section id="messages" class="messages" role="log" aria-live="polite" aria-label="Conversation">
+        <div class="welcome-state">
+          <div class="welcome-icon">✦</div>
+          <h2 class="welcome-heading">How are you feeling today?</h2>
+          <p class="welcome-body">I'm here to listen and support you — no judgment, just presence.</p>
+          <div class="welcome-chips">
+            <button class="prompt-chip" data-prompt="I've been feeling anxious lately and don't know why.">I've been feeling anxious</button>
+            <button class="prompt-chip" data-prompt="I need help understanding my tenant rights.">Tenant rights question</button>
+            <button class="prompt-chip" data-prompt="I'm having trouble sleeping because of stress.">Trouble sleeping</button>
+            <button class="prompt-chip" data-prompt="What are my rights if I'm fired without notice?">Wrongful termination</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sources panel (legal mode) -->
+      <div id="sourcesPanel" class="sources-panel hidden">
+        <button id="sourcesToggle" class="sources-toggle">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          <span id="sourcesToggleText">Show sources</span>
+          <span id="sourcesCount" class="sources-badge"></span>
+        </button>
+        <div id="sourcesList" class="sources-list hidden"></div>
+      </div>
+
+      <div class="composer-wrap">
+        <form id="composer" class="composer">
+          <div class="composer-inner">
+            <textarea id="prompt" rows="1" placeholder="Message Lumen… (Shift+Enter for new line)" aria-label="Message input"></textarea>
+            <div class="composer-actions">
+              <span id="charCount" class="char-count">0 / 2000</span>
+              <button type="submit" id="sendBtn" class="send-btn" aria-label="Send message">
+                <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+              </button>
+            </div>
+          </div>
+        </form>
+        <p class="composer-hint">Lumen is not a substitute for professional help. In an emergency, call 112.</p>
+      </div>
+    </main>
+
+    <!-- Right panel: KB upload (legal mode) -->
+    <aside id="kbPanel" class="kb-panel hidden">
+      <div class="kb-header">
+        <h2 class="kb-title">Knowledge Base</h2>
+        <button id="kbClose" class="icon-btn" aria-label="Close knowledge base panel">
+          <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </div>
+      <p class="kb-desc">Upload PDF or TXT documents to ground legal answers in your own materials.</p>
+      <label class="file-drop" id="fileDrop">
+        <input id="kbFiles" type="file" multiple accept=".pdf,.txt" class="sr-only" />
+        <svg viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+        <span>Drop files here or <u>browse</u></span>
+        <span class="file-types">.pdf, .txt — max 10 MB each</span>
+      </label>
+      <div id="fileList" class="file-list"></div>
+      <button id="uploadBtn" class="btn-secondary full-width">Upload files</button>
+      <button id="ingestBtn" class="btn-ghost full-width">⚡ Ingest knowledge base</button>
+      <p id="kbStatus" class="kb-status"></p>
+    </aside>
+
+    <!-- KB toggle button (visible in legal mode) -->
+    <button id="kbToggle" class="kb-toggle-btn hidden" aria-label="Open knowledge base panel">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+      KB
+    </button>
+  </div>
+
+  <!-- Toast notification container -->
+  <div id="toastContainer" class="toast-container" aria-live="assertive"></div>
+
+  <script src="/frontend/app.js"></script>
+</body>
+</html>
