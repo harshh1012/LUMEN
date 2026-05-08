@@ -14,6 +14,7 @@ psycopg2-binary==2.9.9
 
 # ─── AI / LLM ─────────────────────────────────────────────────────────────────
 google-generativeai==0.5.4
+google-cloud-aiplatform==1.67.1
 
 # ─── Embeddings & NLP (Python 3.12 + Windows compatible) ──────────────────────
 torch==2.2.2

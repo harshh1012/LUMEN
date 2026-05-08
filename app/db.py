@@ -1,16 +1,20 @@
 import os
 from sqlalchemy import create_engine, Column, Integer, String, Text, DateTime, ForeignKey, JSON, Boolean, event
+from sqlalchemy.exc import OperationalError
 from sqlalchemy.orm import sessionmaker, declarative_base, relationship
 from datetime import datetime
 from dotenv import load_dotenv
 
 load_dotenv()
 
+DEFAULT_SQLITE_URL = "sqlite:///./data/kb.sqlite"
 DATABASE_URL = (
     os.getenv("DATABASE_URL")
     or os.getenv("SUPABASE_DB_URL")
-    or "sqlite:///./data/kb.sqlite"
+    or DEFAULT_SQLITE_URL
 )
+LOCAL_DB_FALLBACK_URL = os.getenv("LOCAL_DB_FALLBACK_URL", DEFAULT_SQLITE_URL)
+ALLOW_DB_FALLBACK = os.getenv("ALLOW_DB_FALLBACK", "true").lower() not in {"0", "false", "no"}
 
 if DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
@@ -46,6 +50,32 @@ def make_engine():
 engine = make_engine()
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 Base = declarative_base()
+
+
+def _using_sqlite(url=None):
+    return (url or DATABASE_URL).startswith("sqlite")
+
+
+def _db_label(url=None):
+    url = url or DATABASE_URL
+    return "PostgreSQL (Supabase)" if "supabase" in url else url
+
+
+def _switch_to_local_db(reason):
+    global DATABASE_URL, engine, SessionLocal, is_sqlite
+
+    if not ALLOW_DB_FALLBACK or _using_sqlite() or not LOCAL_DB_FALLBACK_URL:
+        raise reason
+
+    original_url = DATABASE_URL
+    DATABASE_URL = LOCAL_DB_FALLBACK_URL
+    is_sqlite = _using_sqlite()
+    os.makedirs("data", exist_ok=True)
+    engine.dispose()
+    engine = make_engine()
+    SessionLocal.configure(bind=engine)
+    print(f"[DB] Remote database unavailable ({reason}). Falling back to {DATABASE_URL}.")
+    print(f"[DB] Original database was: {_db_label(original_url)}")
 
 
 class User(Base):
@@ -109,10 +139,14 @@ class RateLimit(Base):
 
 def init_db():
     # For PostgreSQL, ensure the data folder isn't needed
-    if "sqlite" in DATABASE_URL:
+    if _using_sqlite():
         os.makedirs("data", exist_ok=True)
-    Base.metadata.create_all(engine)
-    print(f"[DB] Connected to: {'PostgreSQL (Supabase)' if 'supabase' in DATABASE_URL else DATABASE_URL}")
+    try:
+        Base.metadata.create_all(engine)
+    except OperationalError as exc:
+        _switch_to_local_db(exc)
+        Base.metadata.create_all(engine)
+    print(f"[DB] Connected to: {_db_label()}")
 
 def ping_db():
     """Check if database connection is alive."""

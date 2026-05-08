@@ -4,6 +4,7 @@ __pycache__/
 
 # Virtual environment
 .venv/
+venv/
 
 # Env files
 .env
@@ -13,11 +14,16 @@ __pycache__/
 .streamlit/
 
 # SQLite DB
+*.sqlite
 data/kb.sqlite
+data/test_*.sqlite
 data/embeddings.npy
 data/embeddings_meta.json
 
+# Test/coverage output
+.coverage
+.pytest_cache/
+htmlcov/
+
 # KB docs
 data/kb_docs/
-    
-.venv/
