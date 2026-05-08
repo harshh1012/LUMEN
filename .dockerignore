@@ -1,0 +1,17 @@
+.git
+.pytest_cache
+.coverage
+htmlcov
+__pycache__
+*.pyc
+
+.env
+.env.*
+
+.venv
+venv
+
+data/*.sqlite
+data/kb_docs
+data/embeddings.npy
+data/embeddings_meta.json

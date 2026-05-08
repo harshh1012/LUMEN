@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: lumen-ai-assistant
+    runtime: docker
+    plan: free
+    region: singapore
+    branch: main
+    healthCheckPath: /api/health
+    autoDeployTrigger: commit
+    envVars:
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ALLOW_DB_FALLBACK
+        value: "false"
+      - key: MODEL_NAME
+        value: models/gemini-2.5-flash
